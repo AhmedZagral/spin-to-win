@@ -56,29 +56,6 @@
   filter: blur(0px);
 }
 
-.wheel-center {
-  position: absolute;
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(135deg, #b76e79 0%, #d4a5a5 100%);
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.center-text {
-  color: white;
-  font-weight: 700;
-  font-size: 16px;
-  letter-spacing: 1px;
-}
-
 .wheel-segment {
   position: absolute;
   width: 50%;
@@ -105,6 +82,31 @@
 
 .wheel.blurred .segment-text {
   filter: blur(4px);
+}
+
+/* Fixed Logo - Does NOT Rotate */
+.wheel-center-fixed {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 15;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  background: white;
+  border: 3px solid white;
+}
+
+.center-logo {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  border-radius: 50%;
 }
 
 .spin-button {
@@ -168,5 +170,15 @@
   
   .segment-text {
     font-size: 11px;
+  }
+  
+  .wheel-center-fixed {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .center-logo {
+    width: 70px;
+    height: 70px;
   }
 }

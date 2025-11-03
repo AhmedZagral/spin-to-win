@@ -23,12 +23,10 @@ const SpinWheel = ({ onSpinComplete }) => {
     setIsSpinning(true);
     setHasSpun(true);
     
-    // Truly random selection
     const randomIndex = Math.floor(Math.random() * prizes.length);
     const selectedPrize = prizes[randomIndex];
     
-    // Calculate rotation
-    const spins = 5 + Math.random() * 3; // 5-8 full rotations
+    const spins = 5 + Math.random() * 3;
     const segmentAngle = 360 / prizes.length;
     const targetAngle = 360 - (randomIndex * segmentAngle) + (segmentAngle / 2);
     const finalRotation = (360 * spins) + targetAngle;
@@ -38,13 +36,11 @@ const SpinWheel = ({ onSpinComplete }) => {
     setTimeout(() => {
       setIsSpinning(false);
       
-      // If "TRY AGAIN", auto-spin again after 1 second
       if (selectedPrize.label === 'TRY AGAIN') {
         setTimeout(() => {
           handleSpin();
         }, 1000);
       } else {
-        // Move to form without revealing prize
         onSpinComplete(selectedPrize);
       }
     }, 4000);
@@ -59,6 +55,14 @@ const SpinWheel = ({ onSpinComplete }) => {
       
       <div className="wheel-wrapper">
         <div className="wheel-pointer"></div>
+        
+        {/* Fixed Logo - Does NOT Rotate */}
+        <div className="wheel-center-fixed">
+          <img src={require('./logo.jpg')} alt="Inzavy Logo" className="center-logo" />
+
+        </div>
+        
+        {/* Spinning Wheel */}
         <div 
           className={`wheel ${isSpinning ? 'spinning' : ''} ${hasSpun ? 'blurred' : ''}`}
           style={{ 
@@ -66,9 +70,6 @@ const SpinWheel = ({ onSpinComplete }) => {
             transition: isSpinning ? 'transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99)' : 'none'
           }}
         >
-          <div className="wheel-center">
-            <span className="center-text">SPIN</span>
-          </div>
           {prizes.map((prize, index) => {
             const angle = (360 / prizes.length) * index;
             return (
