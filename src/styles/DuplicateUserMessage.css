@@ -1,0 +1,177 @@
+.duplicate-container {
+  width: 100%;
+  max-width: 600px;
+  animation: fadeIn 0.8s ease-in;
+}
+
+.duplicate-card {
+  background: white;
+  border-radius: 24px;
+  padding: 60px 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.duplicate-header {
+  margin-bottom: 40px;
+}
+
+.star-decoration {
+  font-size: 48px;
+  margin-bottom: 20px;
+  animation: twinkle 2s infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.duplicate-title {
+  font-size: 36px;
+  color: #b76e79;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.duplicate-subtitle {
+  font-size: 16px;
+  color: #6b6b6b;
+}
+
+.already-won-section {
+  background: linear-gradient(135deg, #fff5f5 0%, #f8f3f0 100%);
+  border-radius: 16px;
+  padding: 30px;
+  margin-bottom: 40px;
+  border: 2px solid #f0d9dd;
+}
+
+.check-mark {
+  font-size: 48px;
+  color: #b76e79;
+  margin-bottom: 15px;
+}
+
+.already-won-text {
+  font-size: 18px;
+  color: #b76e79;
+  font-weight: 600;
+}
+
+.reward-details-box {
+  background: white;
+  border: 2px solid #f0d9dd;
+  border-radius: 16px;
+  padding: 30px;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.details-title {
+  font-size: 18px;
+  color: #b76e79;
+  margin-bottom: 25px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #f0d9dd;
+}
+
+.detail-item:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.detail-label {
+  font-size: 14px;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.detail-value {
+  font-size: 16px;
+  color: #4a4a4a;
+  font-weight: 600;
+}
+
+.coupon-code {
+  font-family: 'Courier New', monospace;
+  color: #b76e79;
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+
+.fair-play-message {
+  background: #fff5f5;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 30px;
+}
+
+.fair-play-message p {
+  font-size: 14px;
+  color: #b76e79;
+  font-weight: 500;
+}
+
+.home-button {
+  background: linear-gradient(135deg, #b76e79 0%, #d4a5a5 100%);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 18px 60px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(183, 110, 121, 0.3);
+  font-family: 'Manrope', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.home-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(183, 110, 121, 0.4);
+}
+
+.thanks-message {
+  margin-top: 25px;
+  font-size: 16px;
+  color: #b76e79;
+  font-weight: 600;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .duplicate-card {
+    padding: 40px 25px;
+  }
+  
+  .duplicate-title {
+    font-size: 28px;
+  }
+  
+  .already-won-text {
+    font-size: 16px;
+  }
+  
+  .detail-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
