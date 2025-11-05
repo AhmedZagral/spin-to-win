@@ -1,82 +1,45 @@
 .form-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  @apply fixed inset-0 flex items-center justify-center z-[1000] p-5;
   background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
   animation: fadeIn 0.3s ease-in;
-  padding: 20px;
 }
 
 .form-modal {
-  background: white;
-  border-radius: 24px;
-  padding: 50px;
-  max-width: 500px;
-  width: 90%;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+  @apply bg-white rounded-24 p-[50px] max-w-[500px] w-[90%] shadow-[0_30px_80px_rgba(0,0,0,0.3)];
   animation: slideUp 0.5s ease-out;
 }
 
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(50px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
 .blurred-prize {
-  text-align: center;
-  margin-bottom: 40px;
+  @apply text-center mb-10;
 }
 
 .prize-announcement {
-  font-size: 32px;
-  color: #b76e79;
-  margin-bottom: 20px;
+  @apply text-[32px] text-roseGold mb-5;
 }
 
 .blurred-text {
-  font-size: 28px;
-  font-weight: 700;
-  color: #d4a5a5;
+  @apply text-[28px] font-bold text-lightRose mb-[15px] select-none;
   filter: blur(5px);
-  margin-bottom: 15px;
-  user-select: none;
 }
 
 .unlock-message {
-  font-size: 16px;
-  color: #6b6b6b;
+  @apply text-[16px] text-textMid;
 }
 
 .data-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  @apply flex flex-col gap-5;
 }
 
 .form-group {
-  width: 100%;
+  @apply w-full;
 }
 
 .form-input {
-  width: 100%;
-  padding: 16px 20px;
-  border: 2px solid #f0d9dd;
-  border-radius: 12px;
-  font-size: 16px;
-  font-family: 'Manrope', sans-serif;
-  transition: all 0.3s ease;
+  @apply w-full py-4 px-5 border-2 border-borderRose rounded-12 text-[16px] font-manrope transition-all duration-300 outline-none;
 }
 
 .form-input:focus {
-  outline: none;
-  border-color: #b76e79;
-  box-shadow: 0 0 0 3px rgba(183, 110, 121, 0.1);
+  @apply border-roseGold shadow-[0_0_0_3px_rgba(183,110,121,0.1)];
 }
 
 .form-input::placeholder {
@@ -84,41 +47,32 @@
 }
 
 .submit-button {
-  background: linear-gradient(135deg, #b76e79 0%, #d4a5a5 100%);
-  color: white;
-  border: none;
-  border-radius: 12px;
-  padding: 18px;
-  font-size: 18px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 10px 30px rgba(183, 110, 121, 0.3);
-  font-family: 'Manrope', sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  @apply bg-gradient-to-br from-roseGold to-lightRose text-white border-0 rounded-12 p-[18px] text-[18px] font-bold cursor-pointer uppercase tracking-[1px] transition-all duration-300 shadow-roseGlow font-manrope;
 }
 
 .submit-button:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 15px 40px rgba(183, 110, 121, 0.4);
+  @apply -translate-y-[2px] shadow-roseGlowLg;
 }
 
 .submit-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+  @apply opacity-60 cursor-not-allowed;
 }
 
+/* Keyframes preserved for exact motion */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-  .form-modal {
-    padding: 30px 25px;
-  }
-  
-  .prize-announcement {
-    font-size: 26px;
-  }
-  
-  .blurred-text {
-    font-size: 24px;
-  }
+  .form-modal { @apply p-[30px]; padding-left: 25px; padding-right: 25px; }
+
+  .prize-announcement { font-size: 26px; }
+  .blurred-text { font-size: 24px; }
 }

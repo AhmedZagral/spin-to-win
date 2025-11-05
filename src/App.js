@@ -1,66 +1,107 @@
-import React, { useState } from 'react';
-import LandingPage from './components/LandingPage';
-import SpinWheel from './components/SpinWheel';
-import UserDataForm from './components/UserDataForm';
-import CouponDisplay from './components/CouponDisplay';
-import DuplicateUserMessage from './components/DuplicateUserMessage';
-import './styles/App.css';
+import React, { useState } from "react";
+import "./styles/App.css";
 
-function App() {
-  const [stage, setStage] = useState('landing');
-  const [prizeWon, setPrizeWon] = useState(null);
-  const [userData, setUserData] = useState(null);
-  const [duplicateData, setDuplicateData] = useState(null);
+// Components (paths match your structure)
+import LandingPage from "./components/LandingPage";
+import SpinWheel from "./components/SpinWheel";
+import UserDataForm from "./components/UserDataForm";
+import CouponDisplay from "./components/CouponDisplay";
+import DuplicateUserMessage from "./components/DuplicateUserMessage";
 
-  const handleStartSpin = () => {
-    setStage('spinning');
-  };
+export default function App() {
+  // screens: 'landing' | 'spin' | 'form' | 'coupon' | 'duplicate'
+  const [screen, setScreen] = useState("landing");
 
+  // prize selected from SpinWheel (object: { label, value, color })
+  const [selectedPrize, setSelectedPrize] = useState(null);
+
+  // data for success path (CouponDisplay expects { name, mobile, couponCode, expiryDate, prize })
+  const [userSuccessData, setUserSuccessData] = useState(null);
+
+  // data for duplicate path (DuplicateUserMessage expects { mobile, previousData })
+  const [duplicateInfo, setDuplicateInfo] = useState(null);
+
+  // Landing -> Spin
+  const handleStartSpin = () => setScreen("spin");
+
+  // Spin complete -> Form
   const handleSpinComplete = (prize) => {
-    setPrizeWon(prize);
-    setStage('form');
+    setSelectedPrize(prize);
+    setScreen("form");
   };
 
-  const handleFormSubmit = (data) => {
-    setUserData(data);
-    setStage('coupon');
+  // Form success -> Coupon
+  const handleSubmitSuccess = ({ name, mobile, couponCode, expiryDate, prize }) => {
+    setUserSuccessData({ name, mobile, couponCode, expiryDate, prize });
+    setScreen("coupon");
   };
 
+  // Form duplicate -> Duplicate screen
   const handleDuplicateUser = (mobile, previousData) => {
-    setDuplicateData({ mobile, previousData });
-    setStage('duplicate');
+    setDuplicateInfo({ mobile, previousData });
+    setScreen("duplicate");
+  };
+
+  // simple “home” reset
+  const goHome = () => {
+    setSelectedPrize(null);
+    setUserSuccessData(null);
+    setDuplicateInfo(null);
+    setScreen("landing");
   };
 
   return (
     <div className="app">
-      {stage === 'landing' && (
-        <LandingPage onStartSpin={handleStartSpin} />
-      )}
-      
-      {stage === 'spinning' && (
-        <SpinWheel onSpinComplete={handleSpinComplete} />
-      )}
-      
-      {stage === 'form' && (
-        <UserDataForm 
-          prize={prizeWon} 
-          onSubmitSuccess={handleFormSubmit}
+      {screen === "landing" && <LandingPage onStartSpin={handleStartSpin} />}
+
+      {screen === "spin" && <SpinWheel onSpinComplete={handleSpinComplete} />}
+
+      {screen === "form" && selectedPrize && (
+        <UserDataForm
+          prize={selectedPrize}
+          onSubmitSuccess={handleSubmitSuccess}
           onDuplicateUser={handleDuplicateUser}
         />
       )}
-      
-      {stage === 'coupon' && (
-        <CouponDisplay userData={userData} />
+
+      {screen === "coupon" && userSuccessData && (
+        <CouponDisplay userData={userSuccessData} />
       )}
 
-      {stage === 'duplicate' && (
-        <DuplicateUserMessage 
-          mobile={duplicateData.mobile}
-          previousData={duplicateData.previousData}
+      {screen === "duplicate" && duplicateInfo && (
+        <DuplicateUserMessage
+          mobile={duplicateInfo.mobile}
+          previousData={duplicateInfo.previousData}
         />
+      )}
+
+      {/* Fallback (shouldn’t be visible normally) */}
+      {!["landing", "spin", "form", "coupon", "duplicate"].includes(screen) && (
+        <div className="bg-white p-6 rounded-2xl shadow-lg">Loading…</div>
+      )}
+
+      {/* Small home button when not on landing (optional) */}
+      {screen !== "landing" && (
+        <button
+          onClick={goHome}
+          style={{
+            position: "fixed",
+            left: 16,
+            bottom: 16,
+            background:
+              "linear-gradient(135deg, #b76e79 0%, #d4a5a5 100%)",
+            color: "#fff",
+            border: "none",
+            borderRadius: 9999,
+            padding: "10px 16px",
+            fontWeight: 700,
+            boxShadow: "0 10px 30px rgba(183, 110, 121, 0.3)",
+            cursor: "pointer",
+          }}
+        >
+          Home
+        </button>
       )}
     </div>
   );
 }
-
-export default App;
