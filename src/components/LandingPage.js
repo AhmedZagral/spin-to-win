@@ -1,24 +1,152 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/LandingPage.css';
 
 const LandingPage = ({ onStartSpin }) => {
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
-    <div className="landing-container">
-      <div className="landing-content">
-        <h1 className="landing-title">Unlock Your Exclusive Offer</h1>
-        <p className="landing-subtitle">
-          Spin the wheel for a chance to win exciting discounts on premium jewelry
-        </p>
-        <div className="winners-indicator">
-          <span className="pulse-dot"></span>
-          <span className="winners-text">Only 9 Free Jewellery Remaining Today</span>
+    <div className="landing-page">
+      {/* Animated Background Elements */}
+      <div className="bg-elements">
+        <div className="bg-blob bg-blob-1"></div>
+        <div className="bg-blob bg-blob-2"></div>
+        <div className="bg-blob bg-blob-3"></div>
+      </div>
+
+      {/* Floating Particles */}
+      <div className="particles-container">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="particle"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${5 + Math.random() * 10}s`
+            }}
+          />
+        ))}
+      </div>
+
+      <div className={`landing-content ${mounted ? 'visible' : ''}`}>
+        {/* Logo */}
+        <div className="logo-wrapper">
+          <img
+            src="https://z-cdn-media.chatglm.cn/files/e71e8dd6-4642-468f-8851-b0c2e78bdeae_Inzavy-logo-1-bg-removed.png?auth_key=1789971051-e19bbd431da546d4952611a263cabb4f-0-7335cb89bf943abf61ba30d46bc7911c"
+            alt="Inzavy Logo"
+            className="brand-logo"
+          />
         </div>
-        <button className="cta-button" onClick={onStartSpin}>
-          Spin to Unlock
-        </button>
-        <p className="terms-link">
-          By continuing, you agree to our <a href="#privacy">Privacy Policy</a>
-        </p>
+
+        {/* Main Card */}
+        <div className="main-card">
+          <div className="card-glow"></div>
+          
+          <div className="card-content">
+            <div className="exclusive-badge">
+              <span className="badge-text">✨ EXCLUSIVE OFFER</span>
+            </div>
+
+            <h1 className="main-title">
+              Unlock Your Free Reward
+            </h1>
+            
+            <p className="main-subtitle">
+              Spin the wheel for a chance to win exclusive discounts on our exquisite handcrafted jewelry collection
+            </p>
+
+            {/* Live Winners Counter */}
+            <div className="winners-counter">
+              <div className="pulse-indicator">
+                <span className="pulse-ring"></span>
+                <span className="pulse-dot"></span>
+              </div>
+              <span className="counter-text">
+                🎁 Only 7 FREE Jewelry Pieces Left Today!
+              </span>
+            </div>
+
+            {/* CTA Button */}
+            <button onClick={onStartSpin} className="cta-button">
+              <span className="button-content">
+                🎯 SPIN TO WIN NOW
+                <svg className="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </span>
+              <div className="button-gradient"></div>
+            </button>
+
+            {/* Social Links */}
+            <div className="social-links">
+              <a 
+                href="https://www.instagram.com/inzavy_/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="social-icon instagram"
+              >
+                <svg fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </a>
+              
+              <a 
+                href="https://www.linkedin.com/company/inzavy/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="social-icon linkedin"
+              >
+                <svg fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+              </a>
+              
+              <a 
+                href="https://wa.me/+919000206900" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="social-icon whatsapp"
+              >
+                <svg fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                </svg>
+              </a>
+            </div>
+
+            {/* Terms */}
+            <p className="terms-text">
+              By continuing, you agree to our{' '}
+              <a href="#privacy" className="terms-link">Privacy Policy</a>
+            </p>
+          </div>
+        </div>
+
+        {/* Trust Badges */}
+        <div className="trust-badges">
+          <div className="badge-item">
+            <svg className="badge-icon" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
+            </svg>
+            <span>100% Authentic</span>
+          </div>
+          <div className="badge-item">
+            <svg className="badge-icon" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
+            </svg>
+            <span>Handcrafted</span>
+          </div>
+          <div className="badge-item">
+            <svg className="badge-icon" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
+            </svg>
+            <span>Women-Led</span>
+          </div>
+        </div>
       </div>
     </div>
   );
