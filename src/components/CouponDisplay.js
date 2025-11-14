@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/CouponDisplay.css';
 
 const CouponDisplay = ({ userData }) => {
@@ -6,9 +7,18 @@ const CouponDisplay = ({ userData }) => {
 
   useEffect(() => {
     // Send coupon via WhatsApp using wa.me link
-    const message = `Hi ${name}! 🎉 Congratulations on winning ${prize.label}! Your coupon code is: ${couponCode}. Valid till: ${new Date(expiryDate).toLocaleDateString('en-IN')}. Shop now at our store!`;
+    const message = `Hi ${name}! 🎉 Congratulations on winning ${prize.label}! 
+
+Your coupon code is: ${couponCode}
+
+Valid for 15 days from our launch date.
+
+Note: We will notify you of our launching date on this number.
+
+Shop now at our store!`;
+
     const whatsappUrl = `https://wa.me/91${mobile}?text=${encodeURIComponent(message)}`;
-    
+
     // Open WhatsApp in new tab after 1 second
     setTimeout(() => {
       window.open(whatsappUrl, '_blank');
@@ -23,44 +33,55 @@ const CouponDisplay = ({ userData }) => {
   return (
     <div className="coupon-container">
       <div className="coupon-card">
-        <div className="coupon-header">
-          <h2 className="success-title">🎊 Your Prize is Ready!</h2>
-          <p className="success-subtitle">Thank you, {name}!</p>
+        <div className="success-animation">
+          <div className="checkmark">✓</div>
         </div>
-        
-        <div className="prize-badge">
-          <span className="prize-value">{prize.label}</span>
-        </div>
-        
-        <div className="coupon-code-section">
+
+        <h2 className="congrats-title">🎉 Congratulations!</h2>
+        <p className="congrats-text">Thank you, {name}!</p>
+
+        <div className="coupon-code-box">
           <p className="code-label">Your Coupon Code</p>
-          <div className="coupon-code-box">
-            <span className="coupon-code">{couponCode}</span>
+          <div className="code-display">
+            <span className="code-text">{couponCode}</span>
+            <button onClick={copyToClipboard} className="copy-btn">
+              📋 Copy
+            </button>
           </div>
-          <button className="copy-button" onClick={copyToClipboard}>
-            Copy Code
-          </button>
         </div>
-        
-        <div className="expiry-section">
-          <p className="expiry-text">
-            Valid till: <strong>{new Date(expiryDate).toLocaleDateString('en-IN', { 
-              day: 'numeric', 
-              month: 'long', 
-              year: 'numeric' 
-            })}</strong>
+
+        <div className="validity-info">
+          <p className="validity-label">Valid for:</p>
+          <p className="validity-text">
+            <strong>15 Days from the date of launching</strong>
           </p>
         </div>
-        
-        <div className="whatsapp-notice">
-          <p>📱 Coupon sent to your WhatsApp!</p>
-          <p className="notice-subtext">Check your messages for details</p>
+
+        <div className="launch-note">
+          <p className="note-icon">📱</p>
+          <p className="note-text">
+            <strong>Note:</strong> We will notify you of our launching date on your given number
+          </p>
         </div>
-        
-        <div className="brand-message">
-          <p className="brand-text">Shop premium jewelry at exclusive prices</p>
-          <a href="#privacy" className="privacy-link">Privacy Policy</a>
+
+        <div className="whatsapp-info">
+          <p className="whatsapp-text">📱 Coupon sent to your WhatsApp!</p>
+          <p className="whatsapp-subtext">Check your messages for details</p>
         </div>
+
+        <div className="cta-section">
+          <p className="cta-text">Shop premium jewelry at exclusive prices</p>
+          <a 
+            href="https://www.instagram.com/inzavy_/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="visit-btn"
+          >
+            Visit Our Store
+          </a>
+        </div>
+
+        <Link to="/" className="privacy-link">Privacy Policy</Link>
       </div>
     </div>
   );

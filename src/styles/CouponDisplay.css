@@ -41,3 +41,54 @@
 
 .privacy-link { @apply text-[12px] text-roseGold no-underline; }
 .privacy-link:hover { @apply underline; }
+
+
+.launch-note {
+  background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);
+  border-left: 4px solid #b76e79;
+  padding: 16px;
+  border-radius: 8px;
+  margin: 20px 0;
+  text-align: left;
+}
+
+.note-icon {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.note-text {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.note-text strong {
+  color: #b76e79;
+  font-weight: 600;
+}
+
+.validity-info {
+  background: #f8f8f8;
+  padding: 16px;
+  border-radius: 12px;
+  margin: 20px 0;
+}
+
+.validity-label {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.validity-text {
+  color: #333;
+  font-size: 16px;
+  margin: 0;
+}
+
+.validity-text strong {
+  color: #b76e79;
+  font-weight: 600;
+}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/LandingPage.css';
 
 const LandingPage = ({ onStartSpin }) => {
@@ -118,10 +119,12 @@ const LandingPage = ({ onStartSpin }) => {
               </a>
             </div>
 
-            {/* Terms */}
+            {/* Terms - FIXED: Changed from <a> to <Link> */}
             <p className="terms-text">
-              By continuing, you agree to our{' '}
-              <a href="#privacy" className="terms-link">Privacy Policy</a>
+              By using our service, you agree to our{' '}
+              <Link to="/privacy-policy" className="terms-link">
+                Privacy Policy
+              </Link>
             </p>
           </div>
         </div>
